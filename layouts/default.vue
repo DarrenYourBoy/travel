@@ -1,13 +1,26 @@
 <template>
   <div>
+    <Header />
     <nuxt />
+    <Footer />
   </div>
 </template>
 
+<script>
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+export default {
+  components: {
+    Header,
+    Footer
+  }
+};
+</script>
+
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -47,7 +60,9 @@ html {
   padding: 10px 30px;
   margin-left: 15px;
 }
-
+a {
+  text-decoration: none;
+}
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;

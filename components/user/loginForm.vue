@@ -3,21 +3,16 @@
     <el-form-item class="form-item" prop="username">
       <el-input v-model="form.username" placeholder="用户名/手机"></el-input>
     </el-form-item>
-
     <el-form-item class="form-item" prop="password">
       <el-input v-model="form.password" placeholder="密码" type="password"></el-input>
     </el-form-item>
-
     <p class="form-text">
       <nuxt-link to="#">忘记密码</nuxt-link>
     </p>
-
     <el-button class="submit" type="primary" @click="handleLoginSubmit">登录</el-button>
   </el-form>
 </template>
-
 <script>
-import { async } from "q";
 export default {
   data() {
     return {
@@ -42,14 +37,24 @@ export default {
         // valid是表单验证的结果
         if (valid) {
           // 提交登录接口
-          const res = await this.$axios({
+          var res = await this.$axios({
             url: "/accounts/login",
             method: "POST",
             data: this.form
           });
+
           if (res.status === 200) {
             this.$message.success("登录成功");
-            this.$router.push("/")
+            // this.$router.push("/")
+
+            const data = res.data;
+            // 把用户信息token保存到本地，在头部组件中显示用户数据
+
+            // vuex不能通过直接赋值方式来修改state的值
+            // this.$store.state.user.username = data.user.nickname;
+            // 通过调用mutation下的方法掉修改state的值,commit方法调用mutation的方法
+            // 非常类似于$emit
+            this.$store.commit("user/setUserInfo", data);
           }
         }
       });
@@ -57,7 +62,6 @@ export default {
   }
 };
 </script>
-
 <style scoped lang="less">
 .form {
   padding: 25px;

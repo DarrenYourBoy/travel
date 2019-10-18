@@ -12,7 +12,5 @@ export const mutations = {
     }
 }
 
-
-
 // 存放的是异步修改state的方法
 export const actions = {} 
